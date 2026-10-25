@@ -15,7 +15,7 @@ While the game is paused, enemies, bots, timers, reactor countdowns, alarms and 
 
 ## Config
 
-`BepInEx/config/retr0mrwave.GTFOPause.cfg` (or the r2modman config editor):
+`BepInEx/config/mrwave.GTFOPause.cfg` (or the r2modman config editor):
 
 | Setting | Default | What it does |
 |---|---|---|

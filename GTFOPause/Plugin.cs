@@ -10,7 +10,7 @@ namespace GTFOPause;
 [BepInDependency("dev.gtfomodding.gtfo-api")]
 public class Plugin : BasePlugin
 {
-    public const string Guid = "retr0mrwave.GTFOPause";
+    public const string Guid = "mrwave.GTFOPause";
     public const string Name = "GTFOPause";
     public const string Version = "0.1.0";
 
