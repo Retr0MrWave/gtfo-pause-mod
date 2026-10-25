@@ -24,7 +24,9 @@ GTFO also ships a dormant `PauseManager` (it sets `timeScale` and broadcasts `Gl
 2. Set `GameFolder` to an r2modman GTFO profile that has launched once, so `BepInEx/interop` exists.
 3. Optionally, set `DeployFolder` to a test profile. Each build then copies the DLL into `BepInEx/plugins/GTFOPause/` there.
 4. Build with `dotnet build -c Debug`.
-5. Package with `./scripts/package.sh`, which writes `dist/GTFOPause-<version>.zip`. The script checks that the manifest, `Plugin.cs` and csproj versions match.
+5. Package with `./scripts/package.sh`. The script checks that the manifest, `Plugin.cs` and csproj versions match, then writes two zips:
+   - `dist/GTFOPause-<version>.zip`: the Thunderstore package. It also works with r2modman's "Import local mod".
+   - `dist/GTFOPause-<version>-manual.zip`: holds only `BepInEx/plugins/GTFOPause/GTFOPause.dll`. Extract it into a profile folder (r2modman: Settings → Browse profile folder).
 
 `scripts/make-icon.py` regenerates `thunderstore/icon.png` (standard library only).
 

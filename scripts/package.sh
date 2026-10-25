@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# Builds Release and zips a Thunderstore package into dist/.
+# Builds Release and writes two zips into dist/:
+#   GTFOPause-<ver>.zip         Thunderstore package (r2modman: Settings > Import local mod)
+#   GTFOPause-<ver>-manual.zip  BepInEx/plugins/GTFOPause/GTFOPause.dll, to extract into a profile folder
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -23,3 +25,12 @@ out="$PWD/dist/GTFOPause-$version.zip"
 rm -f "$out"
 (cd "$staging" && zip -q -r "$out" .)
 echo "Packaged $out"
+
+manual_staging=$(mktemp -d)
+trap 'rm -rf "$staging" "$manual_staging"' EXIT
+mkdir -p "$manual_staging/BepInEx/plugins/GTFOPause"
+cp GTFOPause/bin/Release/GTFOPause.dll "$manual_staging/BepInEx/plugins/GTFOPause/"
+manual_out="$PWD/dist/GTFOPause-$version-manual.zip"
+rm -f "$manual_out"
+(cd "$manual_staging" && zip -q -r -X "$manual_out" BepInEx)
+echo "Packaged $manual_out"
