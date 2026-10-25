@@ -1,6 +1,7 @@
 using BepInEx;
 using BepInEx.Unity.IL2CPP;
 using GTFO.API;
+using GTFOPause.Net;
 using HarmonyLib;
 
 namespace GTFOPause;
@@ -20,6 +21,7 @@ public class Plugin : BasePlugin
 
         new Harmony(Guid).PatchAll();
         AddComponent<PauseController>();
+        PauseNet.Register();
 
         EventAPI.OnFocusStateChanged += PauseLogic.OnFocusStateChanged;
         EventAPI.OnGameStateChanged += PauseLogic.OnGameStateChanged;

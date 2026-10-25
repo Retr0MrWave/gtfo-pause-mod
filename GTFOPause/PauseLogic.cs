@@ -1,3 +1,4 @@
+using GTFOPause.Net;
 using SNetwork;
 using UnityEngine;
 
@@ -40,6 +41,7 @@ internal static class PauseLogic
     public static void Tick()
     {
         WatchSession();
+        PauseNet.Tick();
 
         if (Input.GetKeyDown(PauseConfig.PauseHotkey.Value) && PauseRules.HotkeyAllowedIn(FocusStateManager.CurrentState))
             OnHotkey();
@@ -51,6 +53,7 @@ internal static class PauseLogic
             return;
 
         Logger.Info($"Force resume: {why}");
+        PauseNet.OnLocalForceResume();
         PauseState.Clear();
     }
 
@@ -69,7 +72,7 @@ internal static class PauseLogic
             return;
         }
 
-        Notify.Event("Multiplayer pause isn't available yet");
+        PauseNet.OnHotkey();
     }
 
     /// <summary>A pause never survives leaving the level, a join or leave, or a host change.</summary>
