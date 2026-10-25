@@ -38,12 +38,29 @@ internal static class Notify
         {
             layer.SetMessage(BannerText(), ePUIMessageStyle.Message, BannerPriority);
             layer.MessageVisible = true;
+            HideIntroBoxes(layer.m_message);
         }
         else
         {
             layer.MessageVisible = false;
         }
         s_bannerShown = show;
+    }
+
+    /// <summary>
+    /// Showing a hidden message plays its intro: CoroutineManager.BlinkOut flashes white boxes over it,
+    /// timed on Clock.Time, which stands still while paused. The boxes would stay up and hide the
+    /// banner, so switch them off every frame (BlinkOut leaves them off when it finishes anyway).
+    /// </summary>
+    private static void HideIntroBoxes(PUI_InteractionPrompt prompt)
+    {
+        if (prompt == null)
+            return;
+
+        if (prompt.m_whiteBox != null && prompt.m_whiteBox.activeSelf)
+            prompt.m_whiteBox.SetActive(false);
+        if (prompt.m_whiteBoxWide != null && prompt.m_whiteBoxWide.activeSelf)
+            prompt.m_whiteBoxWide.SetActive(false);
     }
 
     private static string BannerText()

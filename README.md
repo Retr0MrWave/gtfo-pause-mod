@@ -43,7 +43,7 @@ These haven't been verified in game yet. Watch `BepInEx/LogOutput.log` for `Paus
 - **Tools and effects:** sentries, mines, C-foam and infection stay frozen.
 - **Audio:** it freezes and resumes, with no burst of queued menu clicks on resume.
 - **F8 pause:** in FPS it blocks move, look and shoot; Esc still opens the menu and the game stays paused.
-- **Banner:** the PAUSED banner shows over interaction prompts.
+- **Banner:** the PAUSED banner shows over interaction prompts, and also when no other message is up (no stuck white box from the message's intro).
 - **Leave expedition:** works from the paused menu.
 - **F8 binding:** F8 isn't bound to anything in GTFO.
 
