@@ -1,0 +1,9 @@
+{
+  "name": "GTFOPause",
+  "version_number": "0.1.0",
+  "website_url": "",
+  "description": "Pause GTFO like Risk of Rain 2: solo play freezes while the Esc menu is open or on a hotkey, and hosts can allow multiplayer pause.",
+  "dependencies": [
+    "BepInEx-BepInExPack_GTFO-3.2.1"
+  ]
+}
