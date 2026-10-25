@@ -1,0 +1,10 @@
+bin/
+obj/
+dist/
+.vs/
+.idea/
+*.user
+.DS_Store
+
+# Machine-specific path to the r2modman profile (copy GameFolder.props.example)
+GameFolder.props

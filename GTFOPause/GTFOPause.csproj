@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk" InitialTargets="ValidateGameFolder">
+  <Import Project="GameFolder.props" Condition="Exists('GameFolder.props')" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Platforms>x64</Platforms>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>GTFOPause</AssemblyName>
+    <RootNamespace>GTFOPause</RootNamespace>
+    <Version>0.1.0</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <BepInExFolder>$(GameFolder)/BepInEx</BepInExFolder>
+  </PropertyGroup>
+
+  <Target Name="ValidateGameFolder">
+    <Error Text="Set GameFolder in GTFOPause/GameFolder.props (see GameFolder.props.example) to an r2modman GTFO profile that has BepInEx/interop."
+           Condition="'$(GameFolder)' == '' Or !Exists('$(BepInExFolder)/interop')" />
+  </Target>
+
+  <!-- BepInEx -->
+  <ItemGroup>
+    <Reference Include="$(BepInExFolder)/core/BepInEx.Core.dll" Private="false" />
+    <Reference Include="$(BepInExFolder)/core/BepInEx.Unity.Common.dll" Private="false" />
+    <Reference Include="$(BepInExFolder)/core/BepInEx.Unity.IL2CPP.dll" Private="false" />
+    <Reference Include="$(BepInExFolder)/core/0Harmony.dll" Private="false" />
+    <Reference Include="$(BepInExFolder)/core/Il2CppInterop.Common.dll" Private="false" />
+    <Reference Include="$(BepInExFolder)/core/Il2CppInterop.Runtime.dll" Private="false" />
+  </ItemGroup>
+
+  <!-- Game interop assemblies and GTFO-API (ships with BepInExPack_GTFO) -->
+  <ItemGroup>
+    <Reference Include="$(BepInExFolder)/interop/*.dll" Exclude="$(BepInExFolder)/interop/netstandard.dll" Private="false" />
+    <Reference Include="$(BepInExFolder)/plugins/GTFO-API.dll" Private="false" />
+  </ItemGroup>
+
+  <Target Name="DeployToProfile" AfterTargets="Build" Condition="'$(DeployFolder)' != ''">
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(DeployFolder)/BepInEx/plugins/GTFOPause" />
+    <Message Importance="high" Text="Deployed $(TargetFileName) to $(DeployFolder)/BepInEx/plugins/GTFOPause" />
+  </Target>
+</Project>

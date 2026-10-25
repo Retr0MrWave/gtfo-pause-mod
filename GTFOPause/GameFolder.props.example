@@ -1,0 +1,8 @@
+<Project>
+  <PropertyGroup>
+    <!-- Any r2modman GTFO profile that has run once (so BepInEx/interop exists). Used for references only. -->
+    <GameFolder>/path/to/r2modmanPlus-local/GTFO/profiles/Default</GameFolder>
+    <!-- Optional: profile the built DLL is copied into (BepInEx/plugins/GTFOPause/). Leave empty to skip. -->
+    <DeployFolder></DeployFolder>
+  </PropertyGroup>
+</Project>
