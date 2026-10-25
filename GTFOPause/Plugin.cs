@@ -1,5 +1,6 @@
 using BepInEx;
 using BepInEx.Unity.IL2CPP;
+using GTFO.API;
 using HarmonyLib;
 
 namespace GTFOPause;
@@ -15,7 +16,15 @@ public class Plugin : BasePlugin
     public override void Load()
     {
         Logger.Setup(Log);
+        PauseConfig.Bind(Config);
+
         new Harmony(Guid).PatchAll();
+        AddComponent<PauseController>();
+
+        EventAPI.OnFocusStateChanged += PauseLogic.OnFocusStateChanged;
+        EventAPI.OnGameStateChanged += PauseLogic.OnGameStateChanged;
+        EventAPI.OnCheckpointReloaded += PauseLogic.OnCheckpointReloaded;
+
         Logger.Info($"{Name} {Version} loaded");
     }
 }
