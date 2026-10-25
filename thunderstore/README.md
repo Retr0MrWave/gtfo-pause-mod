@@ -3,7 +3,7 @@
 Pause GTFO the way Risk of Rain 2 does.
 
 - **Solo** (you plus bots): the game freezes while the Esc menu is open. **F8** pauses without opening the menu.
-- **Multiplayer**: off by default. If the host turns on `AllowMultiplayerPause`, any player can press **F8** to pause the whole squad, and any player can press it again to resume. Everyone sees who paused.
+- **Multiplayer**: any player can press **F8** to pause the whole squad, and any player can press it again to resume. Everyone sees who paused. The host can turn this off with `AllowMultiplayerPause`.
 
 While the game is paused, enemies, bots, timers, reactor countdowns, alarms and the expedition timer all stop. Game audio freezes and picks up where it left off. Voice chat keeps working.
 
@@ -22,7 +22,7 @@ While the game is paused, enemies, bots, timers, reactor countdowns, alarms and 
 | `General.PauseOnMenu` | `true` | Solo: pause while the Esc menu is open |
 | `General.PauseHotkey` | `F8` | Toggle the pause |
 | `General.ShowNotifications` | `true` | PAUSED banner and paused/resumed messages |
-| `Multiplayer.AllowMultiplayerPause` | `false` | Host only: let players pause the squad |
+| `Multiplayer.AllowMultiplayerPause` | `true` | Host only: let players pause the squad |
 
 ## Notes
 

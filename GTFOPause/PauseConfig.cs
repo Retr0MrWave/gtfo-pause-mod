@@ -18,7 +18,7 @@ internal static class PauseConfig
             "Toggles the pause. Solo: pauses without opening the menu. Multiplayer: asks the host to pause everyone.");
         ShowNotifications = config.Bind("General", "ShowNotifications", true,
             "Show the PAUSED banner and the paused/resumed lines in the game event log.");
-        AllowMultiplayerPause = config.Bind("Multiplayer", "AllowMultiplayerPause", false,
-            "Host only: let any player with GTFOPause pause the whole squad. Every human player needs the mod.");
+        AllowMultiplayerPause = config.Bind("Multiplayer", "AllowMultiplayerPause", true,
+            "Host only: let any player with GTFOPause pause the whole squad. Every human player needs the mod. Turn off to keep pausing solo-only.");
     }
 }

@@ -47,7 +47,7 @@ These haven't been verified in game yet. Watch `BepInEx/LogOutput.log` for `Paus
 - **Leave expedition:** works from the paused menu.
 - **F8 binding:** F8 isn't bound to anything in GTFO.
 
-**Multiplayer.** Two machines, with the host on `AllowMultiplayerPause=true`:
+**Multiplayer.** Two machines, with the host on `AllowMultiplayerPause=true` (the default):
 - **Pause and resume:** pause from either side, then resume from the other.
 - **Long pause:** hold 3 minutes with no disconnect.
 - **Setting off:** with `AllowMultiplayerPause=false`, F8 only shows "disabled by the host".
