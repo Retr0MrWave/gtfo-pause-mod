@@ -1,7 +1,7 @@
 {
   "name": "GTFOPause",
   "version_number": "0.1.0",
-  "website_url": "",
+  "website_url": "https://github.com/Retr0MrWave/gtfo-pause-mod",
   "description": "Pause GTFO like Risk of Rain 2: solo play freezes while the Esc menu is open or on a hotkey, and in multiplayer any player can pause the squad.",
   "dependencies": [
     "BepInEx-BepInExPack_GTFO-3.2.3"
