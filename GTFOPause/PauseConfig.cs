@@ -12,8 +12,8 @@ internal static class PauseConfig
 
     public static void Bind(ConfigFile config)
     {
-        PauseOnMenu = config.Bind("General", "PauseOnMenu", true,
-            "Solo only: pause while the Esc menu is open, like Risk of Rain 2 singleplayer.");
+        PauseOnMenu = config.Bind("General", "PauseOnMenu", false,
+            "Solo only: also pause while the Esc menu is open, like Risk of Rain 2 singleplayer. Off by default: the hotkey is the pause and Esc is just the menu.");
         PauseHotkey = config.Bind("General", "PauseHotkey", KeyCode.F8,
             "Toggles the pause. Solo: pauses without opening the menu. Multiplayer: asks the host to pause everyone.");
         ShowNotifications = config.Bind("General", "ShowNotifications", true,

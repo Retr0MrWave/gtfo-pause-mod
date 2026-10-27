@@ -7,14 +7,17 @@ A BepInEx IL2CPP plugin that pauses GTFO the way Risk of Rain 2 does. User-facin
 - **Freeze:** `Time.timeScale = 0` plus `AkSoundEngine.Suspend(false)`, the same approach as RoR2's `PauseScreenController`.
   - GTFO's `Clock` accumulates `Time.deltaTime`, so gameplay timers stop with it.
   - Outside the engine, only SNet networking, menu UI and the frame limiter read unscaled or real time, so menus and connections keep working. This comes from the Il2CppInterop xref cache.
-- **Solo** (`PauseLogic`): the Esc menu (`eFocusState.MainMenu`) or the hotkey adds a pause reason.
-  - Any game-state change, checkpoint reload, popup, join/leave or host change force-resumes.
+  - The exception is press-and-hold menu buttons (`CM_TimedButton`): they fill and drain their hold timer by `Clock.Delta` (static offset `0x38`, set from `Time.deltaTime` in `Clock.Update`), found by disassembling `GameAssembly.dll`.
+- **Solo** (`PauseLogic`): the hotkey adds a pause reason, and so does the Esc menu (`eFocusState.MainMenu`) when `PauseOnMenu` is on (off by default).
+  - Any game-state change, checkpoint reload, popup, join/leave, host change or leaving the session force-resumes.
 - **Multiplayer** (`Net/PauseNet.cs`): uses GTFO-API `NetworkAPI` events, following RoR2's `PauseStopController`.
   - Clients say hello to the host, and players ask the host to pause.
   - The host broadcasts the squad state and re-sends it every 2 s; clients resume on their own after 6 s without word from the host.
 - **Patches:**
   - `InputMapper.DoGet*` reads as idle in FPS while paused.
   - `GS_InLevel.Update` pins `Clock.ExpeditionProgressionTime`.
+  - `CM_TimedButton.OnHoverUpdate` / `Update` run with `Clock.Delta` set to the real frame time while paused, so holds like Retire to Lobby finish.
+  - `SNet_SyncManager.SessionCommand` (Retire to Lobby sends one) and `SNet_SessionHub.LeaveHub` resume first, so leaving never runs at timeScale 0.
 
 GTFO also ships a dormant `PauseManager` (it sets `timeScale` and broadcasts `Global.OnPaused`, but nothing in vanilla calls it). This plugin leaves it alone.
 
@@ -45,6 +48,8 @@ These haven't been verified in game yet. Watch `BepInEx/LogOutput.log` for `Paus
 - **F8 pause:** in FPS it blocks move, look and shoot; Esc still opens the menu and the game stays paused.
 - **Banner:** the PAUSED banner shows over interaction prompts, and also when no other message is up (no stuck white box from the message's intro).
 - **Leave expedition:** works from the paused menu.
+- **Hold buttons:** pause with F8, open Esc, and hold Retire to Lobby. The bar fills, drains when released, and retiring works. The log shows `Force resume: session command ...`.
+- **PauseOnMenu:** off, Esc alone doesn't pause; on, it does, and the hold buttons still work.
 - **F8 binding:** F8 isn't bound to anything in GTFO.
 
 **Multiplayer.** Two machines, with the host on `AllowMultiplayerPause=true` (the default):

@@ -7,7 +7,7 @@
     <LangVersion>latest</LangVersion>
     <AssemblyName>GTFOPause</AssemblyName>
     <RootNamespace>GTFOPause</RootNamespace>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
